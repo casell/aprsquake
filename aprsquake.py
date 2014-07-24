@@ -66,11 +66,12 @@ def main():
     parser.add_argument('--type', '-t',
                         choices=('significant', '4.5', '2.5', '1.0', 'all'),
                         default='significant',
-                        help='The type of earthquake to retrieve')
+                        help='''The type of earthquake to retrieve
+                              (default: significant)''')
     parser.add_argument('--interval', '-i',
                         choices=('hour', 'day', 'week', 'month'),
                         default='hour',
-                        help='The interval to retrieve')
+                        help='The interval to retrieve (default: hour)')
     args = parser.parse_args()
     json_response = fetch_data(args.type, args.interval)
     commands = (generateAPRScommand(feature)
