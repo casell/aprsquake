@@ -20,7 +20,7 @@ optional arguments:
 installation
 ------------
 
-Install dependencies (just requests) with:
+Install dependencies (just http://python-requests.org) with:
 
 ```
 pip install -r requirements.txt
