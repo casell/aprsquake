@@ -2,6 +2,8 @@
 '''Queries USGS for earthquakes and outputs APRS commands'''
 from argparse import ArgumentParser
 from datetime import datetime
+from socket import create_connection
+import sys
 
 from requests import get
 
@@ -11,7 +13,9 @@ URL = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/%s_%s.geojson'
 BASE_APRS = r'APRS:;%(date)sq%(magNoDec)02d*%(date)sz%(lat)s\%(lng)sQ'
 APRS_COMMENT = r'Mag (%(magType)s) %(mag)s Depth %(depth)d km @ %(place)s'
 
-APRS_COMMAND = BASE_APRS+APRS_COMMENT
+APRS_COMMAND = BASE_APRS+APRS_COMMENT+'\n'
+
+AUTH_COMMAND = 'AUTH %s\n'
 
 
 def toDMM(value):
@@ -59,10 +63,34 @@ def fetch_data(quake_type, interval):
     return response.json()
 
 
+def run_commands(address, auth, commands):
+    output = sys.stdout
+    if address:
+        socket = create_connection(address)
+        output = socket.makefile('w')
+    if auth:
+        output.write(AUTH_COMMAND % auth)
+        output.flush()
+    for command in commands:
+        output.write(command)
+        output.flush()
+    output.flush()
+
+
+def myAddress(value):
+    splival = value.split(':')
+    return splival[0], splival[1]
+
+
 def main():
     '''Parses arguments and calls other parts'''
     parser = ArgumentParser(description='Queries USGS for earthquakes'
                             ' and outputs APRS commands')
+    parser.add_argument('--address', '-a',
+                        type=myAddress,
+                        help='''Host to send commands to as HOST:PORT''')
+    parser.add_argument('--login', '-l',
+                        help='''Login credentials''')
     parser.add_argument('--type', '-t',
                         choices=('significant', '4.5', '2.5', '1.0', 'all'),
                         default='significant',
@@ -76,9 +104,7 @@ def main():
     json_response = fetch_data(args.type, args.interval)
     commands = (generateAPRScommand(feature)
                 for feature in json_response['features'])
-
-    for command in commands:
-        print(command)
+    run_commands(args.address, args.login, commands)
 
 if __name__ == '__main__':
     main()
