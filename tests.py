@@ -4,10 +4,9 @@ try:
     from nose.tools import assert_is_noneee
 except ImportError:
     from nose.tools import assert_true
-    from unittest.util import safe_repr
 
     def assert_is_none(obj):
-        assert_true(obj is None, '%s is not None' % (safe_repr(obj),))
+        assert_true(obj is None, '%s is not None' % (obj,))
 
 from aprsquake import parse_arguments, generateAPRScommand
 
