@@ -39,10 +39,10 @@ def toDMMLong(value):
 def generateAPRScommand(feature):
     '''Generates the APRS command using BASE_APRS as template starting
     from a geoJSON feature'''
-    detail = dict(zip(
+    detail = dict(list(zip(
         ('lng', 'lat', 'depth'),
         feature['geometry']['coordinates']
-    ))
+    )))
     detail['lng'] = toDMMLong(detail['lng'])
     detail['lat'] = toDMMLat(detail['lat'])
     qdate = datetime.utcfromtimestamp(feature['properties']['time'] / 1000.0)

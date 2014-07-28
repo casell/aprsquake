@@ -4,49 +4,49 @@ from aprsquake import parse_arguments, generateAPRScommand
 
 
 TEST_FEATURE = {
-    u'geometry': {
-        u'type': u'Point',
-        u'coordinates':
+    'geometry': {
+        'type': 'Point',
+        'coordinates':
         [-120.6203,
          39.7553,
          15.43]
     },
-    u'type':
-    u'Feature',
-    u'properties': {
-        u'rms': None,
-        u'code':
-        u'00453361',
-        u'cdi': None,
-        u'sources': u',nn,',
-        u'nst': 8,
-        u'tz': -420,
-        u'title': u'M 1.7 - 14km WSW of Portola, California',
-        u'magType': u'ml',
-        u'detail': u'http://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00453361.geojson',
-        u'sig': 47,
-        u'net': u'nn',
-        u'type': u'earthquake',
-        u'status': u'automatic',
-        u'updated': 1406558373057,
-        u'felt': None,
-        u'alert': None,
-        u'dmin': 0.133,
-        u'mag': 1.74,
-        u'gap': 160.07,
-        u'types': u',general-link,geoserve,nearby-cities,origin,phase-data,',
-        u'url': u'http://earthquake.usgs.gov/earthquakes/eventpage/nn00453361',
-        u'ids': u',nn00453361,',
-        u'tsunami': None,
-        u'place': u'14km WSW of Portola, California',
-        u'time': 1406558282550,
-        u'mmi': None
+    'type':
+    'Feature',
+    'properties': {
+        'rms': None,
+        'code':
+        '00453361',
+        'cdi': None,
+        'sources': ',nn,',
+        'nst': 8,
+        'tz': -420,
+        'title': 'M 1.7 - 14km WSW of Portola, California',
+        'magType': 'ml',
+        'detail': 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00453361.geojson',
+        'sig': 47,
+        'net': 'nn',
+        'type': 'earthquake',
+        'status': 'automatic',
+        'updated': 1406558373057,
+        'felt': None,
+        'alert': None,
+        'dmin': 0.133,
+        'mag': 1.74,
+        'gap': 160.07,
+        'types': ',general-link,geoserve,nearby-cities,origin,phase-data,',
+        'url': 'http://earthquake.usgs.gov/earthquakes/eventpage/nn00453361',
+        'ids': ',nn00453361,',
+        'tsunami': None,
+        'place': '14km WSW of Portola, California',
+        'time': 1406558282550,
+        'mmi': None
     },
-    u'id': u'nn00453361'
+    'id': 'nn00453361'
 }
 
 
-TEST_COMMAND = u'APRS:;281438q17*281438z3945.32N\\12037.22WQMag (ml) 1.74 Depth 15 km @ 14km WSW of Portola, California\n'
+TEST_COMMAND = 'APRS:;281438q17*281438z3945.32N\\12037.22WQMag (ml) 1.74 Depth 15 km @ 14km WSW of Portola, California\n'
 
 
 def test_default_args_address():
