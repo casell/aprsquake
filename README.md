@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/casell/aprsquake.svg?branch=master)](https://travis-ci.org/casell/aprsquake)
+
 aprsquake
 =========
 
