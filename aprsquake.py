@@ -79,7 +79,7 @@ def run_commands(address, auth, commands):
 
 def myAddress(value):
     splival = value.split(':')
-    return splival[0], splival[1]
+    return splival[0], int(splival[1])
 
 
 def main():
