@@ -77,17 +77,20 @@ def run_commands(address, auth, commands):
     output.flush()
 
 
-def myAddress(value):
+def address_port(value):
     splival = value.split(':')
-    return splival[0], int(splival[1])
+    if len(splival) == 2:
+        return splival[0], int(splival[1])
+    else:
+        raise ValueError
 
 
-def main():
-    '''Parses arguments and calls other parts'''
+def parse_arguments(*args, **kwargs):
+    '''Parses command line arguments'''
     parser = ArgumentParser(description='Queries USGS for earthquakes'
                             ' and outputs APRS commands')
     parser.add_argument('--address', '-a',
-                        type=myAddress,
+                        type=address_port,
                         help='''Host to send commands to as HOST:PORT''')
     parser.add_argument('--login', '-l',
                         help='''Login credentials''')
@@ -100,7 +103,12 @@ def main():
                         choices=('hour', 'day', 'week', 'month'),
                         default='hour',
                         help='The interval to retrieve (default: hour)')
-    args = parser.parse_args()
+    return parser.parse_args(*args, **kwargs)
+
+
+def main():
+    '''Calls other functions'''
+    args = parse_arguments()
     json_response = fetch_data(args.type, args.interval)
     commands = (generateAPRScommand(feature)
                 for feature in json_response['features'])
