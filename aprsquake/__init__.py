@@ -10,12 +10,12 @@ from requests import get
 
 URL = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/%s_%s.geojson'
 
-BASE_APRS = r'APRS:;%(date)sq%(magNoDec)02d*%(date)sz%(lat)s\%(lng)sQ'
-APRS_COMMENT = r'Mag (%(magType)s) %(mag)s Depth %(depth)d km @ %(place)s'
+BASE_APRS = u'APRS:;%(date)sq%(magNoDec)02d*%(date)sz%(lat)s\\%(lng)sQ'
+APRS_COMMENT = u'Mag (%(magType)s) %(mag)s Depth %(depth)d km @ %(place)s'
 
 APRS_COMMAND = BASE_APRS+APRS_COMMENT+'\n'
 
-AUTH_COMMAND = 'AUTH %s\n'
+AUTH_COMMAND = u'AUTH %s\n'
 
 
 def toDMM(value):
@@ -55,12 +55,6 @@ def generateAPRScommand(feature):
     detail['place'] = feature['properties']['place']
     detail['id'] = feature['id']
     return APRS_COMMAND % detail
-
-
-def fetch_data(quake_type, interval):
-    '''Fetches data from USGS and returns the parsed JSON'''
-    response = get(URL % (quake_type, interval))
-    return response.json()
 
 
 def run_commands(address, auth, commands):
@@ -106,10 +100,10 @@ def parse_arguments(*args, **kwargs):
     return parser.parse_args(*args, **kwargs)
 
 
-def main():
+def main(*args, **kwargs):
     '''Calls other functions'''
-    args = parse_arguments()
-    json_response = fetch_data(args.type, args.interval)
+    args = parse_arguments(*args, **kwargs)
+    json_response = get(URL % (args.type, args.interval)).json()
     commands = (generateAPRScommand(feature)
                 for feature in json_response['features'])
     run_commands(args.address, args.login, commands)
