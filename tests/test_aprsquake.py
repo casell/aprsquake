@@ -111,10 +111,10 @@ TEST_FEATURE_NOMAG = {
 }
 
 
-TEST_COMMAND = (u'APRS:;281438q17*281438z3945.32N\\12037.22WQMag (ml) 1.74'
+TEST_COMMAND = (u'APRS:;281438q17*281438z3945.32N\\12037.22WQMag (ml) 1.74' +
                 ' Depth 15 km @ 14km WSW of Portola, California\n')
-TEST_COMMAND_NOMAG = (u'APRS:;281438q00*281438z3945.32N\\12037.22WQMag (ml) 0'
-                      ' Depth 15 km @ 14km WSW of Portola, California\n')
+TEST_COMMAND_NOMAG = (u'APRS:;281438q00*281438z3945.32N\\12037.22WQMag (ml) ' +
+                      '0 Depth 15 km @ 14km WSW of Portola, California\n')
 
 
 @all_requests
