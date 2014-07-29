@@ -1,4 +1,4 @@
-|Build Status|
+|Build Status| |Coverage Status|
 
 aprsquake
 =========
@@ -42,3 +42,6 @@ then call aprsquake.py
 
 .. |Build Status| image:: https://travis-ci.org/casell/aprsquake.svg?branch=master
    :target: https://travis-ci.org/casell/aprsquake
+
+.. |Coverage Status| image:: https://coveralls.io/repos/casell/aprsquake/badge.png
+  :target: https://coveralls.io/r/casell/aprsquake
