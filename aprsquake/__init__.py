@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 '''Queries USGS for earthquakes and outputs APRS commands'''
+from __future__ import unicode_literals
 from argparse import ArgumentParser
 from datetime import datetime
 from socket import create_connection
@@ -7,15 +8,14 @@ import sys
 
 from requests import get
 
-
 URL = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/%s_%s.geojson'
 
-BASE_APRS = u'APRS:;%(date)sq%(magNoDec)02d*%(date)sz%(lat)s\\%(lng)sQ'
-APRS_COMMENT = u'Mag (%(magType)s) %(mag)s Depth %(depth)d km @ %(place)s'
+BASE_APRS = 'APRS:;%(date)sq%(magNoDec)02d*%(date)sz%(lat)s\\%(lng)sQ'
+APRS_COMMENT = 'Mag (%(magType)s) %(mag)s Depth %(depth)d km @ %(place)s'
 
 APRS_COMMAND = BASE_APRS+APRS_COMMENT+'\n'
 
-AUTH_COMMAND = u'AUTH %s\n'
+AUTH_COMMAND = 'AUTH %s\n'
 
 
 def toDMM(value):

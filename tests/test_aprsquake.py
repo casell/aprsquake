@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import sys
 
 from nose.tools import assert_equal, assert_raises
@@ -111,10 +112,10 @@ TEST_FEATURE_NOMAG = {
 }
 
 
-TEST_COMMAND = (u'APRS:;281438q17*281438z3945.32N\\12037.22WQMag (ml) 1.74' +
-                ' Depth 15 km @ 14km WSW of Portola, California\n')
-TEST_COMMAND_NOMAG = (u'APRS:;281438q00*281438z3945.32N\\12037.22WQMag (ml) ' +
-                      '0 Depth 15 km @ 14km WSW of Portola, California\n')
+TEST_COMMAND = ('APRS:;281438q17*281438z3945.32N\\12037.22WQMag (ml) 1.74 '
+                'Depth 15 km @ 14km WSW of Portola, California\n')
+TEST_COMMAND_NOMAG = ('APRS:;281438q00*281438z3945.32N\\12037.22WQMag (ml) 0 '
+                      'Depth 15 km @ 14km WSW of Portola, California\n')
 
 
 @all_requests
@@ -155,11 +156,11 @@ def test_args_interval_parse():
     assert_equal(parse_arguments(('-iday',)).interval, 'day')
 
 
-def test_generate_APRS():
+def test_generate_aprs():
     assert_equal(generateAPRScommand(TEST_FEATURE), TEST_COMMAND)
 
 
-def test_generate_APRS_MAGNONE():
+def test_generate_aprs_magnone():
     assert_equal(generateAPRScommand(TEST_FEATURE_NOMAG), TEST_COMMAND_NOMAG)
 
 
